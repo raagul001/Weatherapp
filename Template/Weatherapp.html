@@ -1,0 +1,53 @@
+{% extends 'index.html' %}
+{% block content %}
+<style>
+    .shadow {
+        box-shadow: 2px 2px 3px 2px rgb(156, 29, 202);
+        padding: 20px;
+    }
+</style>
+<div class="container-fluid" style="margin-top: 60px; margin-bottom: 100px;">
+    <center>
+    <div class="col-md-4">
+        <h3 class="page-header text-primary text-center">
+            <span class="material-symbols-outlined">weather_mix</span> Weather-Climate Condition
+        </h3>
+
+        {% if messages %}
+            {% for x in messages %}
+                <div class="alert alert-{{ x.tags }}">
+                    {{ x }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="input-group">
+                {{ hello.name }}
+                <button class="btn btn-success" type="submit">Add City</button>
+            </div>
+        </form>
+
+        {% for weather in data %}
+        <div class="shadow media">
+             <div class="media-left text-center">
+                 <a href="#">
+                      <img src="http://openweathermap.org/img/w/{{weather.icon}}.png" class="media-object" alt="Image" style="width: 50px; height: 50px; display: block;"></a>
+                    </div>
+                     <div class="media-body">
+                        <h3 class="media-heading"><b>{{weather.city}}</b></h3>
+                        <h4>{{weather.temperature}}&deg;C</h4>
+                        <h4>{{weather.description}}</h4>
+                        <h4>{{weather.country}}</h4>
+                     </div>
+                      <div class="media-right text-center">
+                        <h3><a href="{% url 'DCity' weather.city %}" style="text-decoration: none;" class="text-danger"><span style="font-size: 24px;">&#x2718;</span></a></h3>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </center>
+    {% endblock %}
+

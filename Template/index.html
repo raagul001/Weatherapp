@@ -1,0 +1,23 @@
+{% include 'header.html' %}
+<html>
+  <head>
+    <title>Climate</title>
+    <style>
+      body {
+        background-image: url('static/Images/climate.jpg'); 
+        background-size: cover; 
+        background-position: center; 
+      }
+    </style>
+  </head>
+  <body>
+    {% block content %}
+
+    {% endblock %}
+  </body>
+</html>
+<script>
+  $(document).ready(function(){
+    $('.alert').hide(5000);
+  });
+</script>
